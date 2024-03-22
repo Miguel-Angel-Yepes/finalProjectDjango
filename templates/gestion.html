@@ -1,0 +1,175 @@
+{% extends "layouts/base.html" %}
+{% block title %}Lista de Productos{% endblock %}
+{% block content %}
+{% include "fragments/menu.html" %}
+
+
+
+<h1>Gestion de Inventario</h1>
+<button id="mostrarFormulario">Filtrar</button>
+
+
+<section class="CajaInventario">
+    <table>
+        <tr>
+            <th>  <section id="box1">Nombre</section></th>
+            <th>  <section class="box azul">Precio</section> </th>
+            <th>  <section class="box morado">Stock</section> </th>
+            <th>  <section class="box rosa">Categoría</section> </th>
+            <th>  <section class="box amarillo">¿Tiene descuento?</section> </th>
+            <th>  <section class="box azul">Descuento</section> </th>
+            <th>  <section class="box morado">Estado</section> </th>
+            <th>  <section class="box rosa">Gestiones</section> </th> 
+        </tr>
+        {% for inventario in inventarios %}
+        <tr>
+            <td>{{ inventario.name }}</td>
+            <td>
+                ${{ inventario.precio_reducido|floatformat:"2" }} 
+                {% if inventario.isdiscount %} (${{ inventario.price|floatformat:"2" }} sin descuento){% endif %}
+            </td>                                       
+            <td>{{ inventario.stock }}</td>
+            <td>{{ inventario.category }}</td>
+            <td>{% if inventario.isdiscount %}Sí{% else %}No{% endif %}</td>
+            <td>{% if inventario.discount %}{{ inventario.discount }}%{% else %}No aplica{% endif %}</td>
+            <td>{{ inventario.state }}</td>
+            <td>
+                <a href="{% url 'actualizar' inventario.id %}"><i class="fi fi-rr-pencil"></i></a> 
+                <span>|</span>
+                <a href="{% url 'detalles_producto' inventario.id %}"><i class="fi fi-rr-trash"></i></a>   
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
+
+<section id="formularioFiltro" style="display: none;">
+    <form  method="GET" style="padding-top: 80px;">
+        <h3>Categorías:</h3><br>
+        {% for categoria in categorias %}
+            <input type="checkbox" id="{{ categoria }}" name="categoria" class="checkbox-custom" name="{{ categoria }}" value="{{ categoria }}" {% if categoria in categorias_seleccionadas %}checked{% endif %}>
+            <label for="{{ categoria }}">
+                <span>{{ categoria }}</span>
+                <span></span>
+            </label>
+        {% endfor %}
+
+        <input type="checkbox" id="hpta" name="descuento" class="checkbox-custom" {% if filtrar_descuento %}checked{% endif %}>
+        <label for="hpta">
+            <span>Productos con descuento</span>
+            <span></span>
+        </label>
+
+        <label>
+            <span>Estado:</span>
+            <section class="select">
+                <section id="category-select">
+                    <input type="checkbox" id="options-view-button">
+                    <section id="select-button">
+                        <section id="selected-value">Todos</section>
+                        <section id="chevrons">
+                            <i class="fi fi-rr-angle-small-down"></i>
+                            <i class="fi fi-rr-angle-small-up"></i>
+                        </section>
+                    </section>
+                </section>
+        
+                <ul id="options">
+
+                    <li class="option">
+                        <input type="radio" name="estado" value="" data-label="Todos" {% if estado == 'ACTIVO' %}checked{% endif %}>
+                        <i class="fi fi-rr-angle-right"></i>
+                        <span class="label">Todos</span>
+                        <i class="fi fi-br-check"></i>
+                    </li>
+
+                    <li class="option">
+                        <input type="radio" name="estado" value="ACTIVO" data-label="Activo" {% if estado == 'ACTIVO' %}checked{% endif %}>
+                        <i class="fi fi-rr-angle-right"></i>
+                        <span class="label">Activo</span>
+                        <i class="fi fi-br-check"></i>
+                    </li>
+        
+                    <li class="option">
+                        <input type="radio" name="estado" value="INACTIVO" data-label="Inactivo" {% if estado == 'INACTIVO' %}checked{% endif %}>
+                        <i class="fi fi-rr-angle-right"></i>
+                        <span class="label">Inactivo</span>
+                        <i class="fi fi-br-check"></i>
+                    </li>
+                </ul>
+            </section>
+        </label>
+    
+        <button type="submit" class="filtrar">Filtrar</button>
+        <button type="submit" id="limpiarFiltros">Sin filtro</button> <!-- Botón para restablecer filtros -->
+    </form>
+</section>
+
+
+{% if mostrar_mensaje_bienvenida %} <!-- Si se debe mostrar el mensaje de bienvenida -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const nombreUsuario = "{{ nombre_usuario }}"; <!-- Obtiene el nombre de usuario -->
+        alert("¡Bienvenido, " + nombreUsuario + "!");
+    });
+</script>
+{% endif %}
+
+<script>
+    let select = document.querySelector('.select'),
+    selectedValue = document.getElementById('selected-value'),
+    optionsViewButton = document.getElementById('options-view-button'),
+    inputsOptions = document.querySelectorAll('.option input')
+    
+    inputsOptions.forEach(input => {
+      input.addEventListener('click', event => {
+        selectedValue.textContent = input.dataset.label
+    
+        const isMouseOrTouch = event.pointerType === "mouse" || event.pointerType === "touch"
+    
+        isMouseOrTouch && optionsViewButton.click()
+      })
+    })
+    
+    window.addEventListener('keydown', e => {
+      if (e.key === "Escape" || e.key === " ") {
+        optionsViewButton.click()
+      }
+    })
+    
+    optionsViewButton.addEventListener('input', () => {
+      select.classList.toggle('open')
+    
+      if(!select.classList.contains('open')) return
+    
+      const input = 
+      document.querySelector('.option input:checked') || document.querySelector('.option input')
+    
+      input.focus()
+    })
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const botonMostrar = document.getElementById('mostrarFormulario');
+        const formularioFiltro = document.getElementById('formularioFiltro');
+        const limpiarFiltros = document.getElementById('limpiarFiltros');
+
+        botonMostrar.addEventListener('click', function () {
+            formularioFiltro.style.display = formularioFiltro.style.display === 'none' ? 'block' : 'none';
+        });
+
+        limpiarFiltros.addEventListener('click', function () {
+            document.querySelector('input[name="estado"][value=""]').checked = true;
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = false; 
+            });
+        });
+    });
+</script>
+
+
+
+
+{% endblock %}

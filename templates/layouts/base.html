@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración del documento -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <!-- Enlaces a archivos estáticos -->
+    <link rel="stylesheet" href="{% static './css/base.css' %}"> <!-- Enlace a la hoja de estilos base.css -->
+    <link rel="icon" href="{% static './img/icon.ico' %}" type="image/x-icon"> <!-- Enlace al icono de la página -->
+
+    <!-- Enlaces a recursos de iconos externos -->
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.2.0/uicons-regular-rounded/css/uicons-regular-rounded.css'> <!-- Enlace a la biblioteca de iconos regulares redondeados -->
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.2.0/uicons-regular-rounded/css/uicons-regular-rounded.css'> <!-- Enlace a la biblioteca de iconos regulares redondeados (repetido por error) -->
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.2.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.2.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <!-- Título de la página -->
+    <title>{% block title %}{% endblock %}</title> <!-- Utiliza el bloque title para definir el título de la página -->
+
+    <!-- Bloque de estilos personalizados -->
+    {% block style %}{% endblock  %}
+</head>
+<body>
+    <!-- Contenido principal de la página -->
+    {% block content %}
+    
+    <script>
+        window.addEventListener('popstate', function(event) {
+            // Recarga la página al retroceder en la flecha de navegación
+            location.reload();
+        });
+    </script>
+    {% endblock  %} <!-- Utiliza el bloque content para definir el contenido principal de la página -->
+
+
+</body>
+</html>

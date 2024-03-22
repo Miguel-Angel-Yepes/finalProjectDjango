@@ -1,0 +1,21 @@
+{% extends "layouts/base.html" %} <!-- Extiende la plantilla base.html -->
+
+{% block title %}Home{% endblock %} <!-- Define el título de la página -->
+
+{% block content %} <!-- Bloque de contenido principal -->
+
+<body class="body home"> <!-- Define la clase de fondo y el color del cuerpo de la página -->
+    <form action="form"> <!-- Formulario de inicio de sesión -->
+
+        <h3 class="homeH3">Bienvenido a la Plataforma CRUD</h3> <!-- Título principal de la página -->
+        <p>En nuestra plataforma, podrás gestionar tus datos de forma eficiente y segura. ¿Listo para empezar?</p> <!-- Texto descriptivo -->
+        <p>Para aprovechar al máximo todas las funcionalidades, te invitamos a iniciar sesión o registrarte.</p> <!-- Texto descriptivo -->
+
+        <section class="homeBox"> <!-- Sección para botones de inicio de sesión y registro -->
+            <a class="submit homeSubmit" href="{% url 'login' %}">Inicio</a> <!-- Botón para iniciar sesión -->
+            <a class="submit homeSubmit" href="{% url 'crear_cuenta' %}">Registrarse</a> <!-- Botón para registrarse -->
+        </section> 
+    </form>
+</body>
+
+{% endblock %}

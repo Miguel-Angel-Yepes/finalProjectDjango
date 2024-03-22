@@ -1,0 +1,671 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos para la navegación */
+nav {
+    background-color: #130f18;
+    padding: 7px 20px;
+    margin-bottom: 70px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 auto; /* Centrar horizontalmente */
+    display: flex; /* Convertir la lista en un contenedor flexible */
+    justify-content: start; /* Centrar los elementos horizontalmente */
+    align-items: center;
+    gap: 15px;
+}
+
+nav ul li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.franja{
+    border-top: 1px solid #ee9999; ;
+    width: 0px;
+    transition: all 0.8s ease-in-out;
+}
+
+nav ul li a {
+    font-size: 1.5rem;
+    color: white;
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: all .3s ease-in-out;
+}
+
+nav ul img{
+    width: 4.5%;
+    height: auto;
+}
+
+nav ul li a:hover {
+    color: #ee9999; 
+}
+
+    nav ul li a:hover ~ .franja{
+        width: calc(100% - 30px);
+    }
+
+
+/* Estilos para las tablas */
+
+span{
+    font-size: 1.7vw;
+}
+
+.fi-rr-pencil:hover{
+    color: #0056b3;
+}
+
+.fi-rr-trash:hover{
+    color: red;
+}
+
+.CajaInventario{
+    margin: 60px auto;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+table {
+    border-radius: 20%;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+tr{
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    height: 70px;
+}
+
+
+th {
+    position: relative;
+    border: none;
+    border-radius: 10px;
+    width: 10%; 
+    text-align: center; /* Centrar el texto horizontalmente */
+    height: 80px;
+}
+
+#box1{
+    font-size: 1rem;
+}
+
+.box {
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #007bff;
+    width: calc(100% - 20px);
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    color: white;
+}
+
+td {
+    border: 0px solid white;
+    padding: 8px;
+    text-align: center;
+    width: 1.5vw;
+    max-width: 1.5vw;
+    overflow-wrap: break-word;
+}
+
+th, td a{
+    text-decoration: none;
+    color: #000000;
+}
+
+/* Estilos para los formularios */
+
+h3{
+    position: absolute;
+    padding-left: 30px;
+    top: 30px;
+    left: 0;
+    width: 92%;
+    height: 60px;
+    font-size: 1.8rem;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    align-items: center;
+    color: white;
+    background-color: #007bff;
+}
+
+#limpiarFiltros{
+    margin-top: 20px;
+    width: 100%; /* Ancho completo */
+    padding: 10px;
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#limpiarFiltros:hover{
+    background-color: #9b0505;
+}
+
+form {
+    margin-top: 2%;
+    background-color: white; /* Azul claro */
+    max-width: 400px; /* Ancho máximo del formulario */
+    margin: 0 auto; /* Centrar el formulario horizontalmente */
+    padding: 20px;
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* Sombra suave */
+    padding-top: 100px;
+}
+
+.form{
+    margin-top: 4.5%;
+    padding-top: 30px;
+}
+
+.login button{
+    margin: 20px 0;
+}
+
+.update{
+    margin-bottom: 70px;
+}
+
+.formButton{
+    margin: 20px 0;
+}
+
+/* Estilos para los campos de entrada de texto, correo y contraseña */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"] {
+    width: 100%; /* Ancho completo */
+    padding: 2%;
+    margin-bottom: 2%;
+    border: 1px solid #ccc; /* Borde gris */
+    border-radius: 5px; /* Bordes redondeados */
+    box-sizing: border-box; /* Tamaño incluyendo el borde */
+}
+
+.body{
+    background-color: #c6def7;
+}
+
+.a:hover{
+    color: rgb(4, 49, 97);
+}
+
+/* Estilos para los select */
+select {
+    width: 100%; /* Ancho completo */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc; /* Borde gris */
+    border-radius: 5px; /* Bordes redondeados */
+    box-sizing: border-box; /* Tamaño incluyendo el borde */
+    background-color: #fff; /* Fondo blanco */
+}
+
+/* Estilos para el botón de envío */
+input[type="submit"] {
+    width: 100%; /* Ancho completo */
+    padding: 10px;
+    border: none;
+    border-radius: 5px; /* Bordes redondeados */
+    color: white;
+    cursor: pointer; /* Cambia el cursor al pasar sobre él */
+    transition: background-color 0.3s ease; /* Transición suave */
+}
+
+
+#mostrarFormulario {
+    display: block;
+    height: 40px;
+    width: 15%;
+    margin: 40px auto;
+    padding: 10px 10px; /* Espaciado interno */
+    font-size: 1rem; /* Tamaño de la fuente */
+    background-color: #007bff;
+    color: #fff; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 10px;
+    cursor: pointer; /* Cursor apuntador al pasar el ratón */
+    transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+}
+
+#mostrarFormulario:hover {
+    background-color: rgb(8, 73, 143);
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+h1{
+    text-align: center;
+}
+
+#formularioFiltro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.623); /* Fondo semi-transparente */
+    z-index: 9999; /* Asegura que esté por encima de otros elementos */
+    display: none; /* Inicialmente oculto */
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Añade un scrollbar vertical si el contenido es demasiado largo */
+}
+
+
+:root {
+    --white: #e8e9ed;
+    --gray: #434257;
+    --blue: #18172c;
+    --green: #3d6df0;
+    --pink: #ff4b77;
+  }
+  
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  ol {
+    list-style: none;
+  }
+  .checkbox-custom {
+    position: absolute;
+    left: -999px;
+}
+
+form label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3%;
+}
+
+form span:last-child {
+    position: relative;
+    width: 50px;
+    height: 26px;
+    border-radius: 15px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
+    background: var(--gray);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+form span:last-child::before,
+form span:last-child::after {
+    content: "";
+    position: absolute;
+}
+
+form span:last-child::before {
+    left: 1px;
+    top: 1px;
+    width: 24px;
+    height: 24px;
+    background: var(--white);
+    border-radius: 50%;
+    z-index: 1;
+    transition: transform 0.3s;
+}
+
+form span:last-child::after {
+    top: 50%;
+    right: 8px;
+    width: 12px;
+    height: 12px;
+    transform: translateY(-50%);
+    background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/uncheck-switcher.svg);
+    background-size: 12px 12px;
+}
+
+.home{
+    padding-top: 9rem;
+} 
+
+.home form{
+    padding-top: 140px;
+}
+
+.homeH3{
+    height: 80px;
+    top: 40px;
+}
+
+.homeBox{
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.checkbox-custom:checked + label span:last-child {
+    background: var(--green);
+}
+
+.checkbox-custom:checked + label span:last-child::before {
+    transform: translateX(24px);
+}
+
+.checkbox-custom:checked + label span:last-child::after {
+    width: 14px;
+    height: 14px;
+    left: 8px;
+    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/checkmark-switcher.svg);
+    background-size: 14px 14px;
+}
+
+#estado {
+    margin-top: 10px;
+    appearance: none;
+    border: 2px solid #929292;
+    border-radius: 5px;
+    background-color: #e9e4e4;
+    background-image: url('../img/angulo-pequeno-hacia-abajo.png'); /* Reemplaza la imagen de la flecha */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-position: right center; /* Ajusta la posición de la imagen de la flecha */
+    background-size: 20px;
+    background-position: right 10px center;
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+#estado:hover{
+    background-size: 22px;
+    background-color: #d1cdcd;
+}
+
+#estado::-ms-expand {
+    display: none; /* Oculta la flecha predeterminada en Internet Explorer */
+}
+
+option {
+    padding: 5px 10px; /* Espaciado interno */
+    background-color: #fff; /* Color de fondo */
+    color: #333; /* Color del texto */
+    height: 60px; /* Altura de las opciones */
+}
+/* Estilos para el hover de las opciones */
+option:hover {
+    background-color: #f0f0f0; /* Color de fondo al hacer hover */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+}
+
+
+h2{
+    padding-bottom: 5%;
+    padding-top: 3%;
+    padding-left: 3%;
+}
+
+input[type="submit"],
+button[type="submit"] {
+    width: 100%; /* Ancho completo */
+    padding: 10px;
+    border: none;
+    border-radius: 5px; /* Bordes redondeados */
+    color: white;
+    cursor: pointer; /* Cambia el cursor al pasar sobre él */
+    transition: background-color 0.3s ease; /* Transición suave */
+}
+
+.submit{
+    display: block;
+    height: 40px;
+    width: 15%;
+    padding: 10px 10px; /* Espaciado interno */
+    font-size: 1rem; /* Tamaño de la fuente */
+    background-color: #007bff;
+    color: #fff; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 10px;
+    cursor: pointer; /* Cursor apuntador al pasar el ratón */
+    transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+    margin: 20px 0px;
+}
+
+.submit:hover{
+    background-color: rgb(8, 73, 143);
+}
+
+form p{
+    padding-top: 2%;
+}
+
+form p a{
+    color:#0056b3
+}
+
+.azul{
+    background-color: #007bff;
+}
+
+.backAmarillo{
+    background-color: #f1e46e;
+} 
+
+.amarillo{
+    background-color: #ebc621;
+} 
+
+.formButton.amarillo:hover {
+    background-color: #d6b004;
+}
+
+.backMorado{
+    background-color: #cb71e2;
+}
+
+.morado{
+    background-color: #a13eb9;
+}
+
+.formButton.morado:hover{
+    background-color: #831c9c;
+}
+
+.backRosa{
+    background-color: #f0b7c5;
+}
+
+.rosa{
+    background-color: #e46484;
+}
+
+.formButton.rosa:hover{
+    background-color: #d33a60;
+}
+
+.homeSubmit{
+    width: calc(50% - 10px);
+    text-align: center;
+}
+
+/* estilos para el select */
+
+.select{
+    width: 10rem;
+    position: relative;
+  }
+  
+  #category-select label{
+    font-size: 0.75rem;
+    letter-spacing: 0.0225rem;
+  }
+  
+  #select-button{
+    margin-top: .5rem;
+    display: flex;
+    padding: 0.75rem;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: .375rem;
+    border: 1px solid black;
+    background-color: #17171A;
+  }
+  
+  #selected-value{
+    color: grey;
+    font-size: 0.875rem;
+    letter-spacing: 0.02625rem;
+  }
+  
+  #chevrons svg{
+    width: 1rem;
+    height: 1rem;
+  }
+  
+  #chevrons{
+    color: grey;
+  }
+  
+  #chevrons [class="fi fi-rr-angle-small-up"]{
+    display: none;
+  }
+  
+  #options-view-button:focus + #select-button,
+  #options-view-button:checked + #selected-button{
+    outline: 1px solid #A881E6;
+  }
+  
+  #category-select:has(#options-view-button:checked) label,
+  #options-view-button:checked + #select-button #chevrons {
+    color: #A881E6;
+  }
+  
+  #options-view-button:checked + #select-button #chevrons
+  [class="fi fi-rr-angle-small-down"] {
+    display: none;
+  }
+  
+  #options-view-button:checked + #select-button #chevrons
+  [class="fi fi-rr-angle-small-up"] {
+    display: block;
+  }
+  
+  #category-select{
+    position: relative;
+  }
+  
+  
+  #options-view-button{
+    all: unset;
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+    z-index: 3;
+  }
+  /* ----------- */
+  
+  #options{
+    border-radius: .375rem;
+    border: 1px solid #252529;
+    background: #17171A;
+    display: none;
+}
+  
+  .option{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .75rem;
+    width: 100%;
+    border-bottom: 1px solid #252529;
+    position: relative;
+  }
+  
+  .option .label{
+    color: #FBF9FE;
+    font-size: 1rem;
+  }
+  
+  .option i{
+    width: 1rem;
+    height: 1rem;
+  }
+  
+  .option i:last-child{
+    margin-left: auto;
+    color: #A881E6;
+    display: none;
+  }
+  
+  .option:has(input:checked),
+  .option:hover{
+    border-bottom: 1px solid #252529;
+    background-color: #252529;
+  }
+  
+  .option:has(input:focus){
+    outline: 1px solid #A881E6;
+  }
+  
+  .option:has(input:checked) [class="fi fi-br-check"]{
+    display: block;
+  }
+  
+  .option input[type="radio"]{
+    all: unset;
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+  }
+  
+  .option:nth-child(1){
+    color: aqua;
+  }
+  
+  #category-select:has(#options-view-button:checked) + #options {
+    display: absolute;
+    display: block; /* Mostrar opciones inicialmente */
+    position: absolute; /* Cambiar la posición a absoluta */
+    top: calc(100% + 5px); /* Posiciona las opciones justo debajo del botón */
+    left: 0; /* Alinea las opciones con el lado izquierdo del botón */
+    z-index: 1000; 
+  }
+  
+  .select:has(.option input:checked) #category-select label {
+    color: #A881E6;
+  }
+  
+  .select:has(.option input:checked) #category-select {
+    color: #FBF9FE;
+  }
+
+  .filtrar{
+    background-color: #0056b3;
+  }
+
+.filtrar:hover{
+    background-color: #007bff;
+}

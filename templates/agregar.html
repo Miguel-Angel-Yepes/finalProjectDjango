@@ -1,0 +1,61 @@
+{% extends "layouts/base.html" %} <!-- Extiende la plantilla base.html -->
+
+{% block title %}Agregar Producto{% endblock %} <!-- Define el título de la página -->
+
+{% block content %} <!-- Bloque de contenido principal -->
+
+{% include "fragments/menu.html" %} <!-- Incluye el menú de navegación -->
+
+<body class="body backAmarillo"> <!-- Define la clase de fondo y el color del cuerpo de la página -->
+    <form method="post" class="update"> <!-- Formulario para agregar un nuevo producto -->
+        <h3 class="amarillo">Agregar Producto</h3> <!-- Título del formulario -->
+        {% csrf_token %} <!-- Token CSRF para protección contra falsificación de solicitudes entre sitios -->
+        <label for="name">Nombre:</label> <!-- Etiqueta para el campo de nombre del producto -->
+        <input type="text" name="name" id="name"> <!-- Campo de entrada de texto para el nombre del producto -->
+        <br>
+
+        <label for="price">Precio:</label> <!-- Etiqueta para el campo de precio del producto -->
+        <input type="text" name="price" id="price"> <!-- Campo de entrada de texto para el precio del producto -->
+        <br>
+
+        <label for="stock">Stock:</label> <!-- Etiqueta para el campo de stock del producto -->
+        <input type="number" name="stock" id="stock"  min="0"> <!-- Campo de entrada numérico para el stock del producto -->
+        <br>
+
+        <label for="category">Categoría:</label> <!-- Etiqueta para el campo de categoría del producto -->
+        <select name="category" id="category"> <!-- Menú desplegable para seleccionar la categoría -->
+            <option value=""></option> <!-- Opción vacía por defecto -->
+            <!-- Utiliza un ciclo for en Django para recorrer las categorías -->
+            {% for categoria in categorias %}
+                <!-- Para cada categoría, crea una opción en el menú desplegable -->
+                <option value="{{ categoria }}">{{ categoria }}</option>
+            {% endfor %}
+        </select>
+        
+        <br>
+
+        <label for="isdiscount">¿Tiene descuento?</label> <!-- Etiqueta para el campo de descuento del producto -->
+        <select name="isdiscount" id="isdiscount" onchange="toggleDiscount()"> <!-- Menú desplegable para seleccionar si tiene descuento -->
+            <option value=""></option> <!-- Opción vacía por defecto -->
+            <option value="True">Sí</option> <!-- Opción para indicar que el producto tiene descuento -->
+            <option value="False">No</option> <!-- Opción para indicar que el producto no tiene descuento -->
+        </select>
+        <br>
+
+        <label for="discount">Descuento:</label> <!-- Etiqueta para el campo de monto de descuento del producto -->
+        <input type="text" name="discount" id="discount" disabled> <!-- Campo de entrada de texto para el monto de descuento (inicialmente deshabilitado) -->
+        <br>
+
+        <button type="submit" class="formButton amarillo" onclick="return confirm('¿Estás seguro de que deseas agregar este producto?')">Guardar</button> <!-- Botón de enviar el formulario -->
+    </form>
+</body>
+
+<script>
+    // Función para habilitar o deshabilitar el campo de monto de descuento según la selección del usuario
+    function toggleDiscount() {
+        let isDiscountSelected = document.getElementById("isdiscount").value === "True"; // Verifica si se seleccionó "Sí" en el campo de descuento
+        document.getElementById("discount").disabled = !isDiscountSelected; // Habilita o deshabilita el campo de monto de descuento según la selección
+    }
+</script>
+
+{% endblock %}

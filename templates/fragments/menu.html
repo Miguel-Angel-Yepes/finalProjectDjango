@@ -1,0 +1,18 @@
+{% load static %}
+
+<!-- Barra de navegación -->
+<nav>
+    <ul>
+        <!-- Icono de la página en la barra de navegación -->
+        <img src="{% static 'img/icon.ico' %}" type="image/x-icon">
+        
+        <!-- Elemento de la lista para agregar productos -->
+        <li><a href="{% url 'agregar' %}">Agregar Productos</a><section class="franja"></section></li>
+        
+        <!-- Elemento de la lista para gestionar el inventario -->
+        <li><a href="{% url 'gestion' %}">Gestionar Inventario</a><section class="franja"></section></li>
+        
+        <!-- Elemento de la lista para cerrar sesión -->
+        <li><a href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a><section class="franja"></section></li>
+    </ul>
+</nav>

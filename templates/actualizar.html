@@ -1,0 +1,80 @@
+{% extends "layouts/base.html" %}  <!-- Extiende la plantilla base.html -->
+
+{% block title %}Actualizar Producto{% endblock %}  <!-- Define el título de la página -->
+
+{% block content %}
+{% include "fragments/menu.html" %}  <!-- Incluye el menú en la página -->
+
+<body class="body backMorado">
+    <form class="update" method="post">  <!-- Formulario para actualizar el producto -->
+        <h3 class="morado">Detalles del Producto</h3>
+        {% csrf_token %}  <!-- Token CSRF para seguridad -->
+
+        <!-- Campos del formulario -->
+        <label for="name">Nombre:</label>
+        <input type="text" name="name" id="name" value="{{ producto.name }}">  <!-- Campo para el nombre del producto -->
+        <br>
+        <label for="price">Precio:</label>
+        <input type="text" name="price" id="price" value="{{ producto.price }}">  <!-- Campo para el precio del producto -->
+        <br>
+        <label for="stock">Stock:</label>
+        <input type="number" name="stock" id="stock" value="{{ producto.stock }}" min="0" onchange="bloquearEstado()">  <!-- Campo para el stock del producto -->
+        <br>
+        <label for="category">Categoría:</label>
+        <select name="category" id="category">  <!-- Selección de categoría del producto -->
+            <option value=""></option>
+            {% for categoria in categorias %}
+                <option value="{{ categoria }}" {% if producto.category == categoria %} selected {% endif %}>{{ categoria }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="isdiscount">¿Tiene descuento?</label>
+        <select name="isdiscount" id="isdiscount" onchange="bloquearDescuento()">  <!-- Selección de descuento -->
+            <option value="True" {% if producto.isdiscount %} selected {% endif %}>Sí</option>
+            <option value="False" {% if not producto.isdiscount %} selected {% endif %}>No</option>
+        </select>
+        <br>
+        <label for="discount">Descuento:</label>
+        <input type="text" name="discount" id="discount" {% if not producto.isdiscount %} disabled {% endif %} value="{% if producto.isdiscount %}{{ producto.discount }}{% else %}0{% endif %}">  <!-- Campo para el descuento -->
+        <br>
+        <label for="state">Estado:</label>
+        <select name="state" id="state">  <!-- Selección del estado del producto -->
+            <option value="ACTIVO" {% if producto.state == 'ACTIVO' %} selected {% endif %} {% if producto.stock <= 0 %}disabled{% endif %}>ACTIVO</option>
+            <option value="INACTIVO" {% if producto.state == 'INACTIVO' %} selected {% endif %} {% if producto.stock > 0 %}disabled{% endif %}>INACTIVO</option>
+        </select>
+        <br>
+        <button class="formButton morado" type="submit" onclick="return confirm('¿Estás seguro de que deseas actualizar este producto?')">Guardar</button>  <!-- Botón para enviar el formulario -->
+    </form>
+</body>
+
+<script>
+    // Función para bloquear el campo de descuento si no se selecciona el descuento
+    function bloquearDescuento() {
+        var isDiscountSelected = document.getElementById("isdiscount").value === "True";
+        document.getElementById("discount").disabled = !isDiscountSelected;
+        if (!isDiscountSelected) {
+            document.getElementById("discount").value = "0";
+        }
+    }
+
+    // Función para bloquear el estado si no hay stock
+    function bloquearEstado() {
+        let stockValue = parseInt(document.getElementById("stock").value);
+        let stateSelect = document.getElementById("state");
+        if (stockValue > 0) {
+            stateSelect.querySelector("option[value='ACTIVO']").disabled = false; // Habilita la opción de estado activo si hay stock
+            stateSelect.querySelector("option[value='INACTIVO']").disabled = true; // Deshabilita la opción de estado inactivo si hay stock
+            stateSelect.value = "ACTIVO"; // Establece el valor predeterminado como activo
+        } else {
+            stateSelect.querySelector("option[value='ACTIVO']").disabled = true; // Deshabilita la opción de estado activo si no hay stock
+            stateSelect.querySelector("option[value='INACTIVO']").disabled = false; // Habilita la opción de estado inactivo si no hay stock
+        }
+    }
+</script>
+
+{% if error_message %}
+<script>
+  alert("{{ error_message }}"); 
+</script>
+{% endif %}
+{% endblock %}

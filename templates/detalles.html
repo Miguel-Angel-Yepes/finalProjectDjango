@@ -1,0 +1,30 @@
+{% extends "layouts/base.html" %} <!-- Extiende la plantilla base.html -->
+
+{% block title %}Detalles del Producto{% endblock %} <!-- Define el título de la página -->
+
+{% block content %} <!-- Bloque de contenido principal -->
+
+{% include "fragments/menu.html" %} <!-- Incluye el menú de navegación -->
+
+<body class="body backRosa"> <!-- Define la clase de fondo y el color del cuerpo de la página -->
+    <form method="post" class="form2 update" action="{% url 'eliminar' producto.id %}" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto?')"> <!-- Formulario para eliminar el producto -->
+        <h3 class="rosa">Detalles del Producto</h3> <!-- Título del formulario -->
+
+        {% csrf_token %} <!-- Token CSRF para protección contra falsificación de solicitudes entre sitios -->
+        <label for="name">Nombre:</label> <!-- Etiqueta para el campo de nombre -->
+        <input type="text" name="name" id="name" value="{{ producto.name }}" disabled><br> <!-- Campo de entrada de texto para el nombre del producto deshabilitado -->
+        <label for="price">Precio:</label> <!-- Etiqueta para el campo de precio -->
+        <input type="text" name="price" id="price" value="{{ producto.price }}" disabled><br> <!-- Campo de entrada de texto para el precio del producto deshabilitado -->
+        <label for="stock">Stock:</label> <!-- Etiqueta para el campo de stock -->
+        <input type="text" name="stock" id="stock" value="{{ producto.stock }}" disabled><br> <!-- Campo de entrada de texto para el stock del producto deshabilitado -->
+        <label for="category">Categoría:</label> <!-- Etiqueta para el campo de categoría -->
+        <input type="text" name="category" id="category" value="{{ producto.category }}" disabled><br> <!-- Campo de entrada de texto para la categoría del producto deshabilitado -->
+        <label for="isdiscount">¿Tiene descuento?</label> <!-- Etiqueta para el campo de descuento -->
+        <input type="text" name="isdiscount" id="isdiscount" value="{% if producto.isdiscount %}Sí{% else %}No{% endif %}" disabled><br> <!-- Campo de entrada de texto para indicar si el producto tiene descuento deshabilitado -->
+        <label for="discount">Descuento:</label> <!-- Etiqueta para el campo de monto de descuento -->
+        <input type="text" name="discount" id="discount" value="{% if producto.isdiscount %}{{ producto.discount }}%{% else %}No aplica{% endif %}" disabled><br> <!-- Campo de entrada de texto para el monto de descuento deshabilitado -->
+        <input type="submit" value="Eliminar Producto" class="formButton rosa"> <!-- Botón para enviar el formulario de eliminación -->
+    </form>
+</body>
+
+{% endblock %}
